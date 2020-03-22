@@ -1,4 +1,4 @@
-# Excursions
+# JavaScript: Formularze
 
 Zdobyliśmy zlecenie, które zostało porzucone przez poprzedniego programistę, a polega na składaniu zamówienia na wycieczki, które są importowane z pliku CSV.
 
@@ -10,7 +10,7 @@ To oznacza, że tym razem nie tylko działamy w JavaScript, ale będziemy musiel
 
 Klient oczekuje, że użytkownik strony będzie mógł załadować sobie za pomoca formularza (`.uploader__input`) [plik CSV](https://pl.wikipedia.org/wiki/CSV_(format_pliku)), na podstawie które zostaną do strony dodane wycieczki.
 
-We wspomianym pliku mamy w każdym wierszu przedstawione dane na temat jednej wycieczki. Wartości są rozdzielone przeciankami są nimi kolejno: id, nazwa, opis, cena za dorosłego oraz cena za dziecko.
+We wspomianym pliku mamy w każdym wierszu przedstawione dane na temat jednej wycieczki. Wartości są rozdzielone przeciankami są nimi kolejno: *id*, *nazwa*, *opis*, *cena za dorosłego* oraz *cena za dziecko*.
 
 Po załadowaniu wycieczek. Użytkownik może wybrać dowolną wycieczkę poprzez wprowadzenie liczby osób dorosłych i dzieci oraz kliknięcie przycisku "dodaj do zamówienia".
 
@@ -20,7 +20,7 @@ Każda zamówienona wycieczka może zostać usunięta z listy klikając w odpowi
 
 Po wybraniu przez użytkownika odpowiednich wycieczek może on złożyć zamówienie wypełniając formularz zamówiania tj. `.order`.
 
-Przed wysłanie formularza musimy sprawdzić czy pola zostały prawidłowo wypełnione tj. Imię i nazwisko nie możę być puste, natomiast adres email musi być prawidłowy.
+Przed wysłanie formularza musimy sprawdzić czy pola zostały prawidłowo wypełnione tj. *Imię i nazwisko nie możę być puste*, natomiast *adres email musi być prawidłowy* (np. zawierać znak małpy tj *@)*.
 
 Jeśli dane są nie poprawne to należy utworzyć w kodzie HTML stosowne miejsce i tam dodawać odpowiednie komunikaty.
 
@@ -48,7 +48,7 @@ Mając "ładowanie wycieczek" powinniśmy zrealizować po koleji:
 * obsługa wybrania pliku przez użytkownika
 * pobranie jego zawartości
 * podział zawartości na wiersze
-* podział wiersa na poszczególne elementy (id, nazwa itp.)
+* podział wiersza na poszczególne elementy (id, nazwa itp.)
 * utworzenie odpowiednich elementów HTML i wypełnienie danymi
 * dodanie ich do drzewa DOM
 
