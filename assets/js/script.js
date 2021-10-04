@@ -27,6 +27,47 @@ function readFile(e) {
 				setText(item, index);
 			});
 			setTourDescription();
+
+			const addOrderList = document.querySelectorAll(
+				'.excursions__field-input--submit'
+			);
+			addOrderList[0].addEventListener('click', addTicketsFirstTour);
+
+			let firstTourAdult = 0;
+			let firstTourChildren = 0;
+			const adultTicketList = document.querySelectorAll(
+				'.excursions__field-input--adult'
+			);
+			const childrenTicketList = document.querySelectorAll(
+				'.excursions__field-input--child'
+			);
+			function addTicketsFirstTour(e) {
+				e.preventDefault();
+				if (adultTicketList[0].value) {
+					firstTourAdult = adultTicketList[0].value;
+					console.log(firstTourAdult);
+				}
+				if (childrenTicketList[0].value) {
+					firstTourChildren = childrenTicketList[0].value;
+					console.log(firstTourChildren);
+				}
+			}
+
+			addOrderList[1].addEventListener('click', addTicketsSecondTour);
+
+			let secondTourAdult = 0;
+			let secondTourChildren = 0;
+			function addTicketsSecondTour(e) {
+				e.preventDefault();
+				if (adultTicketList[1].value) {
+					secondTourAdult = adultTicketList[1].value;
+					console.log(secondTourAdult);
+				}
+				if (childrenTicketList[1].value) {
+					secondTourChildren = childrenTicketList[1].value;
+					console.log(secondTourChildren);
+				}
+			}
 		};
 		reader.readAsText(file, 'UTF-8');
 	} else {
