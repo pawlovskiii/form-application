@@ -3,46 +3,6 @@ const txt = `"1","Ogrodzieniec","Zamek Ogrodzieniec – ruiny zamku leżącego n
 
 // console.log(txt.split(/[\r\n]+/gm));
 
-const splittedTxt = txt.split(/[\r\n]+/gm);
-
-splittedTxt.forEach((item) => {
-	/* ID wycieczki */
-	const idTour = item.substring(1, 2);
-	// console.log(idTour);
-
-	/* Nazwa wycieczki */
-	const nameTour = item.substring(5, 20).split(',');
-	const nameTourExtract = nameTour[0].split('"')[0];
-	// console.log(nameTourExtract);
-
-	/* Opis wycieczki */
-
-	/* Cena za dzieczko/dorosłych */
-	const ticketPrice = item.match(/\d{2}/g);
-	const priceChild = String(ticketPrice.slice(ticketPrice.length - 1));
-	// console.log(priceChild);
-
-	const priceAdult = String(
-		ticketPrice.slice(ticketPrice.length - 2, ticketPrice.length - 1)
-	);
-	// console.log(priceAdult);
-});
-
-/* Opis wycieczki */
-const ogrodzieniecDesc = txt.substring(20, 315);
-// console.log(ogrodzieniecDesc);
-const ojcowDesc = txt.substring(346, 719);
-// console.log(ojcowDesc);
-
-// SPLIT BACKUP WITH CERTAIN WORK
-
-// const ulTours = document.querySelector('.panel__excursions');
-// const liTour = document.querySelector('.excursions__item--prototype');
-// const liTourClone = liTour.cloneNode(true);
-// ulTours.appendChild(liTourClone);
-
-// const toursName = document.querySelectorAll('.excursions__title');
-
 const fileEl = document.querySelector('.uploader__input');
 fileEl.addEventListener('change', readFile);
 const ulTours = document.querySelector('.panel__excursions');
@@ -55,45 +15,64 @@ function readFile(e) {
 		reader.onload = function (readerEvent) {
 			const content = readerEvent.target.result;
 			const splittedTxt = content.split(/[\r\n]+/gm);
-			// console.log(splittedTxt);
 
-			splittedTxt.forEach(() => {
-				const liTourClone = liTour.cloneNode(true);
-				liTourClone.classList.remove('excursions__item--prototype');
-				ulTours.appendChild(liTourClone);
-			});
-			liTour.remove();
+			displayTours(splittedTxt);
 
 			splittedTxt.forEach((item, index) => {
-				/* ID wycieczki */
-				const idTour = item.substring(1, 2);
-				console.log(idTour);
+				setTourName(item, index);
 
-				/* Nazwa wycieczki */
-				const toursName = document.querySelectorAll('.excursions__title');
-				const nameTour = item.substring(5, 20).split(',');
-				const nameTourExtract = nameTour[0].split('"')[0];
-				toursName[index].textContent = nameTourExtract;
+				setChildPrice(item, index);
+				setAdultPrice(item, index);
 
-				/* Cena za dzieczko/dorosłych */
-				const ticketPrice = item.match(/\d{2}/g);
-				const priceChild = String(ticketPrice.slice(ticketPrice.length - 1));
-				// console.log(priceChild);
-
-				const priceAdult = String(
-					ticketPrice.slice(ticketPrice.length - 2, ticketPrice.length - 1)
-				);
-				// console.log(priceAdult);
+				setText(item, index);
 			});
-
-			/* Opis wycieczki */
-			const ogrodzieniecDesc = txt.substring(20, 315);
-			// console.log(ogrodzieniecDesc);
-			const ojcowDesc = txt.substring(346, 719);
-			// console.log(ojcowDesc);
+			setTourDescription();
 		};
 		reader.readAsText(file, 'UTF-8');
 	} else {
 		console.log('Wybierz plik tekstowy!');
 	}
+}
+
+function displayTours(splittedTxt) {
+	splittedTxt.forEach(() => {
+		const liTourClone = liTour.cloneNode(true);
+		liTourClone.classList.remove('excursions__item--prototype');
+		ulTours.appendChild(liTourClone);
+	});
+	liTour.remove();
+}
+
+function setTourName(item, index) {
+	const toursName = document.querySelectorAll('.excursions__title');
+	const nameTour = item.substring(5, 20).split(',');
+	const nameTourExtract = nameTour[0].split('"')[0];
+	toursName[index].textContent = nameTourExtract;
+}
+
+function setChildPrice(item, index) {
+	const childPriceList = document.querySelectorAll('.excursions__price--child');
+	const ticketPrice = item.match(/\d{2}/g);
+	const priceChild = String(ticketPrice.slice(ticketPrice.length - 1));
+	childPriceList[index].textContent = priceChild;
+}
+
+function setAdultPrice(item, index) {
+	const ticketPrice = item.match(/\d{2}/g);
+	const adultPriceList = document.querySelectorAll('.excursions__price--adult');
+	const priceAdult = String(
+		ticketPrice.slice(ticketPrice.length - 2, ticketPrice.length - 1)
+	);
+	adultPriceList[index].textContent = priceAdult;
+}
+
+function setText(item, index) {
+	const tourDescList = document.querySelectorAll('.excursions__description');
+	tourDescList[index].textContent = item;
+}
+
+function setTourDescription() {
+	const tourDescList = document.querySelectorAll('.excursions__description');
+	tourDescList[0].textContent = tourDescList[0].textContent.substring(20, 315);
+	tourDescList[1].textContent = tourDescList[1].textContent.substring(13, 386);
 }
