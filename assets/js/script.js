@@ -21,13 +21,14 @@ function readFile(e) {
 			splittedTxt.forEach((item, index) => {
 				setTourName(item, index);
 
-				setChildPrice(item, index);
 				setAdultPrice(item, index);
+				setChildPrice(item, index);
 
 				setText(item, index);
 			});
 			setTourDescription();
 
+			const basket = []; // Basket with orders
 			const addOrderList = document.querySelectorAll(
 				'.excursions__field-input--submit'
 			);
@@ -43,14 +44,27 @@ function readFile(e) {
 			);
 			function addTicketsFirstTour(e) {
 				e.preventDefault();
+				const obj = { title: 'Ogrodzieniec' };
+				if (basket.length === 0) {
+					basket.push(obj);
+				}
 				if (adultTicketList[0].value) {
 					firstTourAdult = adultTicketList[0].value;
-					console.log(firstTourAdult);
+					const adultPriceList = document.querySelectorAll(
+						'.excursions__price--adult'
+					);
+					basket[0].adultNumber = firstTourAdult;
+					basket[0].adultPrice = adultPriceList[0].textContent;
 				}
 				if (childrenTicketList[0].value) {
 					firstTourChildren = childrenTicketList[0].value;
-					console.log(firstTourChildren);
+					const childrenPriceList = document.querySelectorAll(
+						'.excursions__price--child'
+					);
+					basket[0].childrenNumber = firstTourChildren;
+					basket[0].childrenPrice = childrenPriceList[0].textContent;
 				}
+				console.log(basket);
 			}
 
 			addOrderList[1].addEventListener('click', addTicketsSecondTour);
@@ -59,14 +73,29 @@ function readFile(e) {
 			let secondTourChildren = 0;
 			function addTicketsSecondTour(e) {
 				e.preventDefault();
+				const obj = { title: 'Ojców' };
+				if (basket.length === 0) {
+					basket.push(obj);
+				}
 				if (adultTicketList[1].value) {
 					secondTourAdult = adultTicketList[1].value;
-					console.log(secondTourAdult);
+
+					const adultPriceList = document.querySelectorAll(
+						'.excursions__price--adult'
+					);
+					basket[0].adultNumber = secondTourAdult;
+					basket[0].adultPrice = adultPriceList[1].textContent;
 				}
 				if (childrenTicketList[1].value) {
 					secondTourChildren = childrenTicketList[1].value;
-					console.log(secondTourChildren);
+
+					const childrenPriceList = document.querySelectorAll(
+						'.excursions__price--child'
+					);
+					basket[0].childrenNumber = secondTourChildren;
+					basket[0].childrenPrice = childrenPriceList[1].textContent;
 				}
+				console.log(basket);
 			}
 		};
 		reader.readAsText(file, 'UTF-8');
