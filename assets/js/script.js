@@ -137,6 +137,9 @@ function firstTourOrder(
 			basketOrder[0].childrenPrice = childrenPriceList[0].textContent;
 		}
 		console.log(basketOrder);
+
+		// totalValue
+		totalValueSummary(basketOrder);
 	}
 }
 
@@ -178,5 +181,19 @@ function secondTourOrder(
 			basketOrder[0].childrenPrice = childrenPriceList[1].textContent;
 		}
 		console.log(basketOrder);
+
+		// totalValue
+		totalValueSummary(basketOrder);
 	}
+}
+
+function totalValueSummary(basketOrder) {
+	const totalCostValue = document.querySelector('.order__total-price-value');
+	const summaryCost = document.querySelector('.summary__total-price');
+	const adultTicketsCost =
+		basketOrder[0].adultNumber * basketOrder[0].adultPrice;
+	const childrenTicketCost =
+		basketOrder[0].childrenNumber * basketOrder[0].childrenPrice;
+	totalCostValue.textContent = `${adultTicketsCost + childrenTicketCost}PLN`;
+	summaryCost.textContent = `${adultTicketsCost + childrenTicketCost}PLN`;
 }
