@@ -134,6 +134,7 @@ function firstTourOrder(
 		console.log(basketOrder);
 
 		totalValueSummary(basketOrder);
+		totalNumberOfTickets(basketOrder);
 	}
 }
 
@@ -177,6 +178,7 @@ function secondTourOrder(
 		console.log(basketOrder);
 
 		totalValueSummary(basketOrder);
+		totalNumberOfTickets(basketOrder);
 	}
 }
 
@@ -189,4 +191,9 @@ function totalValueSummary(basketOrder) {
 		basketOrder[0].childrenNumber * basketOrder[0].childrenPrice;
 	totalCostValue.textContent = `${adultTicketsCost + childrenTicketCost}PLN`;
 	summaryCost.textContent = `${adultTicketsCost + childrenTicketCost}PLN`;
+}
+
+function totalNumberOfTickets(basketOrder) {
+	const summaryText = document.querySelector('.summary__prices');
+	summaryText.textContent = `dorośli: ${basketOrder[0].adultNumber} x ${basketOrder[0].adultPrice}PLN, dzieci: ${basketOrder[0].childrenNumber} x ${basketOrder[0].childrenPrice}PLN`;
 }
