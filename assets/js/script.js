@@ -119,7 +119,7 @@ function firstTourOrder(
 			if (basketOrder.length === 0) {
 				basketOrder.push(obj);
 			} else {
-				basketOrder[0].title = 'Ogrodzieniec';
+				basketOrder[0].title = obj.title;
 			}
 			if (numberOfAdultTicketsInputList[0].value) {
 				firstTourAdultQuantityTickets = numberOfAdultTicketsInputList[0].value;
@@ -169,7 +169,7 @@ function secondTourOrder(
 			if (basketOrder.length === 0) {
 				basketOrder.push(obj);
 			} else {
-				basketOrder[0].title = 'Ojców';
+				basketOrder[0].title = obj.title;
 			}
 			if (numberOfAdultTicketsInputList[1].value) {
 				secondTourAdultQuantityTickets = numberOfAdultTicketsInputList[1].value;
@@ -263,7 +263,6 @@ function removeOrder(basketOrder) {
 			summaryCost.textContent = `0PLN`;
 			summaryText.textContent = '';
 			summaryName.textContent = '';
-			basketOrder.pop();
 		}
 	}
 }
