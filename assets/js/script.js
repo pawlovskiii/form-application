@@ -291,19 +291,37 @@ function removeOrder(basketOrder) {
 			const inputQuantityAdultList = document.querySelectorAll(
 				'.excursions__field-input--adult'
 			);
-			inputQuantityAdultList.forEach((item) => {
-				item.value = '';
-			});
 			const inputQuantityChildrenList = document.querySelectorAll(
 				'.excursions__field-input--child'
 			);
-			inputQuantityChildrenList.forEach((item) => {
-				item.value = '';
-			});
-			totalCostValue.textContent = `0PLN`;
-			summaryCost.textContent = `0PLN`;
-			summaryText.textContent = '';
-			summaryName.textContent = '';
+			clearInputValues(
+				inputQuantityAdultList,
+				inputQuantityChildrenList,
+				totalCostValue,
+				summaryCost,
+				summaryText,
+				summaryName
+			);
 		}
 	}
+}
+
+function clearInputValues(
+	inputQuantityAdultList,
+	inputQuantityChildrenList,
+	totalCostValue,
+	summaryCost,
+	summaryText,
+	summaryName
+) {
+	inputQuantityAdultList.forEach((item) => {
+		item.value = '';
+	});
+	inputQuantityChildrenList.forEach((item) => {
+		item.value = '';
+	});
+	totalCostValue.textContent = `0PLN`;
+	summaryCost.textContent = `0PLN`;
+	summaryText.textContent = '';
+	summaryName.textContent = '';
 }
