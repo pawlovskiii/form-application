@@ -37,14 +37,12 @@ function readFile(e) {
 			firstTourOrder(
 				addToOrderBtnList,
 				numberOfAdultTicketsInputList,
-				numberOfChildrenTicketsInputList,
-				basketOrder
+				numberOfChildrenTicketsInputList
 			);
 			secondTourOrder(
 				addToOrderBtnList,
 				numberOfAdultTicketsInputList,
-				numberOfChildrenTicketsInputList,
-				basketOrder
+				numberOfChildrenTicketsInputList
 			);
 
 			removeOrder(basketOrder);
@@ -101,8 +99,7 @@ function setTourDescription() {
 function firstTourOrder(
 	addToOrderBtnList,
 	numberOfAdultTicketsInputList,
-	numberOfChildrenTicketsInputList,
-	basketOrder
+	numberOfChildrenTicketsInputList
 ) {
 	addToOrderBtnList[0].addEventListener('click', addTicketsFirstTour);
 
@@ -116,44 +113,44 @@ function firstTourOrder(
 			!numberOfChildrenTicketsInputList[0].value
 		) {
 			alert('Enter amount of tickets.');
-		}
-		const basketOrder = [];
-		const obj = { title: 'Ogrodzieniec' };
-		if (basketOrder.length === 0) {
-			basketOrder.push(obj);
 		} else {
-			basketOrder[0].title = 'Ogrodzieniec';
-		}
-		if (numberOfAdultTicketsInputList[0].value) {
-			firstTourAdultQuantityTickets = numberOfAdultTicketsInputList[0].value;
-			const adultPriceList = document.querySelectorAll(
-				'.excursions__price--adult'
-			);
-			basketOrder[0].adultNumber = firstTourAdultQuantityTickets;
-			basketOrder[0].adultPrice = adultPriceList[0].textContent;
-		}
-		if (numberOfChildrenTicketsInputList[0].value) {
-			firstTourChildrenQuantityTickets =
-				numberOfChildrenTicketsInputList[0].value;
-			const childrenPriceList = document.querySelectorAll(
-				'.excursions__price--child'
-			);
-			basketOrder[0].childrenNumber = firstTourChildrenQuantityTickets;
-			basketOrder[0].childrenPrice = childrenPriceList[0].textContent;
-		}
-		console.log(basketOrder);
+			const basketOrder = [];
+			const obj = { title: 'Ogrodzieniec' };
+			if (basketOrder.length === 0) {
+				basketOrder.push(obj);
+			} else {
+				basketOrder[0].title = 'Ogrodzieniec';
+			}
+			if (numberOfAdultTicketsInputList[0].value) {
+				firstTourAdultQuantityTickets = numberOfAdultTicketsInputList[0].value;
+				const adultPriceList = document.querySelectorAll(
+					'.excursions__price--adult'
+				);
+				basketOrder[0].adultNumber = firstTourAdultQuantityTickets;
+				basketOrder[0].adultPrice = adultPriceList[0].textContent;
+			}
+			if (numberOfChildrenTicketsInputList[0].value) {
+				firstTourChildrenQuantityTickets =
+					numberOfChildrenTicketsInputList[0].value;
+				const childrenPriceList = document.querySelectorAll(
+					'.excursions__price--child'
+				);
+				basketOrder[0].childrenNumber = firstTourChildrenQuantityTickets;
+				basketOrder[0].childrenPrice = childrenPriceList[0].textContent;
+			}
+			console.log(basketOrder);
 
-		totalValueSummary(basketOrder);
-		totalNumberOfTickets(basketOrder);
-		addTitleTourToSummary(basketOrder);
+			totalValueSummary(basketOrder);
+			totalNumberOfTickets(basketOrder);
+			addTitleTourToSummary(basketOrder);
+		}
 	}
 }
 
 function secondTourOrder(
 	addToOrderBtnList,
 	numberOfAdultTicketsInputList,
-	numberOfChildrenTicketsInputList,
-	basketOrder
+	numberOfChildrenTicketsInputList
 ) {
 	addToOrderBtnList[1].addEventListener('click', addTicketsSecondTour);
 
@@ -166,38 +163,39 @@ function secondTourOrder(
 			!numberOfChildrenTicketsInputList[1].value
 		) {
 			alert('Enter amount of tickets.');
-		}
-		const basketOrder = [];
-		const obj = { title: 'Ojców' };
-		if (basketOrder.length === 0) {
-			basketOrder.push(obj);
 		} else {
-			basketOrder[0].title = 'Ojców';
-		}
-		if (numberOfAdultTicketsInputList[1].value) {
-			secondTourAdultQuantityTickets = numberOfAdultTicketsInputList[1].value;
+			const basketOrder = [];
+			const obj = { title: 'Ojców' };
+			if (basketOrder.length === 0) {
+				basketOrder.push(obj);
+			} else {
+				basketOrder[0].title = 'Ojców';
+			}
+			if (numberOfAdultTicketsInputList[1].value) {
+				secondTourAdultQuantityTickets = numberOfAdultTicketsInputList[1].value;
 
-			const adultPriceList = document.querySelectorAll(
-				'.excursions__price--adult'
-			);
-			basketOrder[0].adultNumber = secondTourAdultQuantityTickets;
-			basketOrder[0].adultPrice = adultPriceList[1].textContent;
-		}
-		if (numberOfChildrenTicketsInputList[1].value) {
-			secondTourChildrenQuantityTickets =
-				numberOfChildrenTicketsInputList[1].value;
+				const adultPriceList = document.querySelectorAll(
+					'.excursions__price--adult'
+				);
+				basketOrder[0].adultNumber = secondTourAdultQuantityTickets;
+				basketOrder[0].adultPrice = adultPriceList[1].textContent;
+			}
+			if (numberOfChildrenTicketsInputList[1].value) {
+				secondTourChildrenQuantityTickets =
+					numberOfChildrenTicketsInputList[1].value;
 
-			const childrenPriceList = document.querySelectorAll(
-				'.excursions__price--child'
-			);
-			basketOrder[0].childrenNumber = secondTourChildrenQuantityTickets;
-			basketOrder[0].childrenPrice = childrenPriceList[1].textContent;
-		}
-		console.log(basketOrder);
+				const childrenPriceList = document.querySelectorAll(
+					'.excursions__price--child'
+				);
+				basketOrder[0].childrenNumber = secondTourChildrenQuantityTickets;
+				basketOrder[0].childrenPrice = childrenPriceList[1].textContent;
+			}
+			console.log(basketOrder);
 
-		totalValueSummary(basketOrder);
-		totalNumberOfTickets(basketOrder);
-		addTitleTourToSummary(basketOrder);
+			totalValueSummary(basketOrder);
+			totalNumberOfTickets(basketOrder);
+			addTitleTourToSummary(basketOrder);
+		}
 	}
 }
 
