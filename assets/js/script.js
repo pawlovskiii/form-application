@@ -110,6 +110,14 @@ function firstTourOrder(
 	let firstTourChildrenQuantityTickets = 0;
 	function addTicketsFirstTour(e) {
 		e.preventDefault();
+
+		if (
+			!numberOfAdultTicketsInputList[0].value &&
+			!numberOfChildrenTicketsInputList[0].value
+		) {
+			alert('Enter amount of tickets.');
+		}
+		const basketOrder = [];
 		const obj = { title: 'Ogrodzieniec' };
 		if (basketOrder.length === 0) {
 			basketOrder.push(obj);
@@ -137,6 +145,7 @@ function firstTourOrder(
 
 		totalValueSummary(basketOrder);
 		totalNumberOfTickets(basketOrder);
+		addTitleTourToSummary(basketOrder);
 	}
 }
 
@@ -152,6 +161,13 @@ function secondTourOrder(
 	let secondTourChildrenQuantityTickets = 0;
 	function addTicketsSecondTour(e) {
 		e.preventDefault();
+		if (
+			!numberOfAdultTicketsInputList[1].value &&
+			!numberOfChildrenTicketsInputList[1].value
+		) {
+			alert('Enter amount of tickets.');
+		}
+		const basketOrder = [];
 		const obj = { title: 'Ojców' };
 		if (basketOrder.length === 0) {
 			basketOrder.push(obj);
@@ -181,6 +197,7 @@ function secondTourOrder(
 
 		totalValueSummary(basketOrder);
 		totalNumberOfTickets(basketOrder);
+		addTitleTourToSummary(basketOrder);
 	}
 }
 
@@ -191,13 +208,32 @@ function totalValueSummary(basketOrder) {
 		basketOrder[0].adultNumber * basketOrder[0].adultPrice;
 	const childrenTicketCost =
 		basketOrder[0].childrenNumber * basketOrder[0].childrenPrice;
-	totalCostValue.textContent = `${adultTicketsCost + childrenTicketCost}PLN`;
-	summaryCost.textContent = `${adultTicketsCost + childrenTicketCost}PLN`;
+	if (adultTicketsCost && childrenTicketCost) {
+		totalCostValue.textContent = `${adultTicketsCost + childrenTicketCost}PLN`;
+		summaryCost.textContent = `${adultTicketsCost + childrenTicketCost}PLN`;
+	} else if (adultTicketsCost) {
+		totalCostValue.textContent = `${adultTicketsCost}PLN`;
+		summaryCost.textContent = `${adultTicketsCost}PLN`;
+	} else if (childrenTicketCost) {
+		totalCostValue.textContent = `${childrenTicketCost}PLN`;
+		summaryCost.textContent = `${childrenTicketCost}PLN`;
+	}
 }
 
 function totalNumberOfTickets(basketOrder) {
 	const summaryText = document.querySelector('.summary__prices');
-	summaryText.textContent = `dorośli: ${basketOrder[0].adultNumber} x ${basketOrder[0].adultPrice}PLN, dzieci: ${basketOrder[0].childrenNumber} x ${basketOrder[0].childrenPrice}PLN`;
+	if (basketOrder[0].adultNumber && basketOrder[0].childrenNumber) {
+		summaryText.textContent = `dorośli: ${basketOrder[0].adultNumber} x ${basketOrder[0].adultPrice}PLN, dzieci: ${basketOrder[0].childrenNumber} x ${basketOrder[0].childrenPrice}PLN`;
+	} else if (basketOrder[0].adultNumber) {
+		summaryText.textContent = `dorośli: ${basketOrder[0].adultNumber} x ${basketOrder[0].adultPrice}PLN`;
+	} else if (basketOrder[0].childrenNumber) {
+		summaryText.textContent = `dzieci: ${basketOrder[0].childrenNumber} x ${basketOrder[0].childrenPrice}PLN`;
+	}
+}
+
+function addTitleTourToSummary(basketOrder) {
+	const summaryName = document.querySelector('.summary__name');
+	summaryName.textContent = basketOrder[0].title;
 }
 
 function removeOrder(basketOrder) {
@@ -229,7 +265,7 @@ function removeOrder(basketOrder) {
 			summaryCost.textContent = `0PLN`;
 			summaryText.textContent = '';
 			summaryName.textContent = '';
-			// basketOrder.pop();
+			basketOrder.pop();
 		}
 	}
 }
