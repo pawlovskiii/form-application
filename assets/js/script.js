@@ -233,6 +233,20 @@ function totalValueSummary(basketOrder) {
 	const adultTicketsCost = basketOrder.adultNumber * basketOrder.adultPrice;
 	const childrenTicketCost =
 		basketOrder.childrenNumber * basketOrder.childrenPrice;
+	possibleOrderOutput(
+		totalCostValue,
+		summaryCost,
+		adultTicketsCost,
+		childrenTicketCost
+	);
+}
+
+function possibleOrderOutput(
+	totalCostValue,
+	summaryCost,
+	adultTicketsCost,
+	childrenTicketCost
+) {
 	if (adultTicketsCost && childrenTicketCost) {
 		totalCostValue.textContent = `${adultTicketsCost + childrenTicketCost}PLN`;
 		summaryCost.textContent = `${adultTicketsCost + childrenTicketCost}PLN`;
