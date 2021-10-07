@@ -40,12 +40,12 @@ function readFile(e) {
 			);
 
 			firstTourOrder(
-				addToOrderBtnList,
+				addToOrderBtnList[0],
 				numberOfAdultTicketsInputList[0],
 				numberOfChildrenTicketsInputList[0]
 			);
 			secondTourOrder(
-				addToOrderBtnList,
+				addToOrderBtnList[1],
 				numberOfAdultTicketsInputList[1],
 				numberOfChildrenTicketsInputList[1]
 			);
@@ -106,7 +106,7 @@ function firstTourOrder(
 	numberOfAdultTicketsInputList,
 	numberOfChildrenTicketsInputList
 ) {
-	addToOrderBtnList[0].addEventListener('click', addTicketsFirstTour);
+	addToOrderBtnList.addEventListener('click', addTicketsFirstTour);
 
 	function addTicketsFirstTour(e) {
 		e.preventDefault();
@@ -191,7 +191,7 @@ function secondTourOrder(
 	numberOfAdultTicketsInputList,
 	numberOfChildrenTicketsInputList
 ) {
-	addToOrderBtnList[1].addEventListener('click', addTicketsSecondTour);
+	addToOrderBtnList.addEventListener('click', addTicketsSecondTour);
 
 	function addTicketsSecondTour(e) {
 		const adultCondition = /^\d+$/g.test(
