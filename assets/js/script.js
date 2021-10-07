@@ -111,11 +111,19 @@ function firstTourOrder(
 	function addTicketsFirstTour(e) {
 		e.preventDefault();
 
+		const adultCondition = /^\d+$/g.test(
+			numberOfAdultTicketsInputList[0].value
+		);
+		const childrenCondition = /^\d+$/g.test(
+			numberOfChildrenTicketsInputList[0].value
+		);
 		if (
 			!numberOfAdultTicketsInputList[0].value &&
 			!numberOfChildrenTicketsInputList[0].value
 		) {
 			alert('Enter amount of tickets.');
+		} else if (!adultCondition || !childrenCondition) {
+			alert('Enter integer values as you order.');
 		} else {
 			const basketOrder = {};
 			const obj = { title: 'Ogrodzieniec' };
@@ -186,12 +194,21 @@ function secondTourOrder(
 	addToOrderBtnList[1].addEventListener('click', addTicketsSecondTour);
 
 	function addTicketsSecondTour(e) {
+		const adultCondition = /^\d+$/g.test(
+			numberOfAdultTicketsInputList[1].value
+		);
+		const childrenCondition = /^\d+$/g.test(
+			numberOfChildrenTicketsInputList[1].value
+		);
+
 		e.preventDefault();
 		if (
 			!numberOfAdultTicketsInputList[1].value &&
 			!numberOfChildrenTicketsInputList[1].value
 		) {
 			alert('Enter amount of tickets.');
+		} else if (!adultCondition || !childrenCondition) {
+			alert('Enter integer values as you order.');
 		} else {
 			const basketOrder = {};
 			const obj = { title: 'Ojców' };
