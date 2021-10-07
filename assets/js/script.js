@@ -41,13 +41,13 @@ function readFile(e) {
 
 			firstTourOrder(
 				addToOrderBtnList,
-				numberOfAdultTicketsInputList,
-				numberOfChildrenTicketsInputList
+				numberOfAdultTicketsInputList[0],
+				numberOfChildrenTicketsInputList[0]
 			);
 			secondTourOrder(
 				addToOrderBtnList,
-				numberOfAdultTicketsInputList,
-				numberOfChildrenTicketsInputList
+				numberOfAdultTicketsInputList[1],
+				numberOfChildrenTicketsInputList[1]
 			);
 
 			removeOrder(basketOrder);
@@ -112,14 +112,14 @@ function firstTourOrder(
 		e.preventDefault();
 
 		const adultCondition = /^\d+$/g.test(
-			numberOfAdultTicketsInputList[0].value
+			numberOfAdultTicketsInputList.value
 		);
 		const childrenCondition = /^\d+$/g.test(
-			numberOfChildrenTicketsInputList[0].value
+			numberOfChildrenTicketsInputList.value
 		);
 		if (
-			!numberOfAdultTicketsInputList[0].value &&
-			!numberOfChildrenTicketsInputList[0].value
+			!numberOfAdultTicketsInputList.value &&
+			!numberOfChildrenTicketsInputList.value
 		) {
 			alert('Enter amount of tickets.');
 		} else if (!adultCondition || !childrenCondition) {
@@ -131,14 +131,14 @@ function firstTourOrder(
 
 			let firstTourAdultQuantityTickets = 0;
 			getQuantityAndPriceTicketsAdultsOrder(
-				numberOfAdultTicketsInputList[0],
+				numberOfAdultTicketsInputList,
 				basketOrder,
 				firstTourAdultQuantityTickets,
 				adultPriceList[0]
 			);
 			let firstTourChildrenQuantityTickets = 0;
 			getQuantityAndPriceTicketsChildrenOrder(
-				numberOfChildrenTicketsInputList[0],
+				numberOfChildrenTicketsInputList,
 				basketOrder,
 				firstTourChildrenQuantityTickets,
 				childrenPriceList[0]
@@ -195,16 +195,16 @@ function secondTourOrder(
 
 	function addTicketsSecondTour(e) {
 		const adultCondition = /^\d+$/g.test(
-			numberOfAdultTicketsInputList[1].value
+			numberOfAdultTicketsInputList.value
 		);
 		const childrenCondition = /^\d+$/g.test(
-			numberOfChildrenTicketsInputList[1].value
+			numberOfChildrenTicketsInputList.value
 		);
 
 		e.preventDefault();
 		if (
-			!numberOfAdultTicketsInputList[1].value &&
-			!numberOfChildrenTicketsInputList[1].value
+			!numberOfAdultTicketsInputList.value &&
+			!numberOfChildrenTicketsInputList.value
 		) {
 			alert('Enter amount of tickets.');
 		} else if (!adultCondition || !childrenCondition) {
@@ -223,14 +223,14 @@ function secondTourOrder(
 
 			let secondTourAdultQuantityTickets = 0;
 			getQuantityAndPriceTicketsAdultsOrder(
-				numberOfAdultTicketsInputList[1],
+				numberOfAdultTicketsInputList,
 				basketOrder,
 				secondTourAdultQuantityTickets,
 				adultPriceList[1]
 			);
 			let secondTourChildrenQuantityTickets = 0;
 			getQuantityAndPriceTicketsChildrenOrder(
-				numberOfChildrenTicketsInputList[1],
+				numberOfChildrenTicketsInputList,
 				basketOrder,
 				secondTourChildrenQuantityTickets,
 				childrenPriceList[1]
