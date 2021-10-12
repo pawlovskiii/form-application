@@ -25,8 +25,8 @@ function readFile(e) {
 				setChildPrice(item, index);
 
 				setText(item, index);
+				setTourDescription(item, index);
 			});
-			setTourDescription();
 
 			clearInputValues();
 
@@ -97,10 +97,9 @@ function setText(item, index) {
 	tourDescList[index].textContent = item;
 }
 
-function setTourDescription() {
+function setTourDescription(item, index) {
 	const tourDescList = document.querySelectorAll('.excursions__description');
-	tourDescList[0].textContent = tourDescList[0].textContent.substring(20, 315);
-	tourDescList[1].textContent = tourDescList[1].textContent.substring(13, 386);
+	tourDescList[index].textContent = item.split('","')[2]
 }
 
 function firstTourOrder(
