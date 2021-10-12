@@ -70,9 +70,7 @@ function displayTours(splittedTxt) {
 
 function setTourName(item, index) {
 	const toursName = document.querySelectorAll('.excursions__title');
-	const nameTour = item.substring(5, 20).split(',');
-	const nameTourExtract = nameTour[0].split('"')[0];
-	toursName[index].textContent = nameTourExtract;
+	toursName[index].textContent = item.split('","')[1];
 }
 
 function setChildPrice(item, index) {
