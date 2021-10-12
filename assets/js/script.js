@@ -29,7 +29,7 @@ function readFile(e) {
 
 			clearInputValues();
 
-			let basketOrder = {};
+			let basketOrder = [];
 			const addToOrderBtnList = document.querySelectorAll(
 				'.excursions__field-input--submit'
 			);
@@ -105,7 +105,10 @@ function firstTourOrder(
 		numberValidation(adultTicketsQuantity, childrenTicketsQuantity);
 
 		const basketOrder = {};
-		const obj = { title: 'Ogrodzieniec' };
+		const title =
+			e.target.parentElement.parentElement.parentElement.firstElementChild
+				.firstElementChild.textContent;
+		const obj = { title: title };
 		setTitleOrder(basketOrder, obj);
 
 		let firstTourAdultQuantityTickets = 0;
@@ -198,7 +201,10 @@ function secondTourOrder(
 		numberValidation(adultTicketsQuantity, childrenTicketsQuantity);
 
 		const basketOrder = {};
-		const obj = { title: 'Ojców' };
+		const title =
+			e.target.parentElement.parentElement.parentElement.firstElementChild
+				.firstElementChild.textContent;
+		const obj = { title: title };
 		setTitleOrder(basketOrder, obj);
 
 		const adultPriceList = document.querySelectorAll(
