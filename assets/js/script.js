@@ -93,6 +93,16 @@ function firstTourOrder(
 	numberOfAdultTicketsInputList,
 	numberOfChildrenTicketsInputList
 ) {
+	// TESTING FUNC
+	const sectionPanel = document.querySelector('.panel');
+	sectionPanel.addEventListener('click', testFunc);
+
+	function testFunc(e) {
+		console.log(e.target);
+		console.log(e.target.value);
+	}
+
+	// NOT CHANGE
 	addToOrderBtnList.addEventListener('click', addTicketsFirstTour);
 
 	function addTicketsFirstTour(e) {
@@ -111,6 +121,14 @@ function firstTourOrder(
 		const obj = { title: title };
 		setTitleOrder(basketOrder, obj);
 
+		const adultPriceList = document.querySelectorAll(
+			'.excursions__price--adult'
+		);
+		const childrenPriceList = document.querySelectorAll(
+			'.excursions__price--child'
+		);
+
+		// NEED TO CHANGE
 		let firstTourAdultQuantityTickets = 0;
 		getQuantityAndPriceTicketsAdultsOrder(
 			numberOfAdultTicketsInputList,
@@ -127,6 +145,7 @@ function firstTourOrder(
 		);
 		console.log(basketOrder);
 
+		// safeZone
 		totalValueSummary(basketOrder);
 		totalNumberOfTickets(basketOrder);
 		addTitleTourToSummary(basketOrder);
@@ -214,6 +233,7 @@ function secondTourOrder(
 			'.excursions__price--child'
 		);
 
+		// NEED TO CHANGE
 		let secondTourAdultQuantityTickets = 0;
 		getQuantityAndPriceTicketsAdultsOrder(
 			numberOfAdultTicketsInputList,
@@ -230,6 +250,7 @@ function secondTourOrder(
 		);
 		console.log(basketOrder);
 
+		// safeZone
 		totalValueSummary(basketOrder);
 		totalNumberOfTickets(basketOrder);
 		addTitleTourToSummary(basketOrder);
