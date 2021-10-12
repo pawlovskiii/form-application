@@ -24,7 +24,6 @@ function readFile(e) {
 				setAdultPrice(item, index);
 				setChildPrice(item, index);
 
-				setText(item, index);
 				setTourDescription(item, index);
 			});
 
@@ -78,28 +77,17 @@ function setTourName(item, index) {
 
 function setChildPrice(item, index) {
 	const childPriceList = document.querySelectorAll('.excursions__price--child');
-	const ticketPrice = item.match(/\d{2}/g);
-	const priceChild = String(ticketPrice.slice(ticketPrice.length - 1));
-	childPriceList[index].textContent = priceChild;
+	childPriceList[index].textContent = item.split('","')[4].replace('"', '');
 }
 
 function setAdultPrice(item, index) {
-	const ticketPrice = item.match(/\d{2}/g);
 	const adultPriceList = document.querySelectorAll('.excursions__price--adult');
-	const priceAdult = String(
-		ticketPrice.slice(ticketPrice.length - 2, ticketPrice.length - 1)
-	);
-	adultPriceList[index].textContent = priceAdult;
-}
-
-function setText(item, index) {
-	const tourDescList = document.querySelectorAll('.excursions__description');
-	tourDescList[index].textContent = item;
+	adultPriceList[index].textContent = item.split('","')[3];
 }
 
 function setTourDescription(item, index) {
 	const tourDescList = document.querySelectorAll('.excursions__description');
-	tourDescList[index].textContent = item.split('","')[2]
+	tourDescList[index].textContent = item.split('","')[2];
 }
 
 function firstTourOrder(
