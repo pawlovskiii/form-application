@@ -2,10 +2,12 @@ document.addEventListener('DOMContentLoaded', function () {
 	const sectionPanel = document.querySelector('.panel');
 	sectionPanel.addEventListener('submit', handleSubmit);
 
+	const basket = [];
+
 	function handleSubmit(e) {
 		e.preventDefault();
 		const formSubmitted = e.target;
-		console.log(formSubmitted);
+		// console.log(formSubmitted);
 
 		const tourTitle =
 			formSubmitted.parentElement.querySelector('.excursions__title');
@@ -20,8 +22,19 @@ document.addEventListener('DOMContentLoaded', function () {
 		);
 		const childPrice = formSubmitted.querySelector('.excursions__price--child');
 
-		console.log(tourTitle.innerText, inputAdult.value, inputChild.value);
-		console.log(adultPrice.innerText, childPrice.innerText);
+		// console.log(tourTitle.innerText, inputAdult.value, inputChild.value);
+		// console.log(adultPrice.innerText, childPrice.innerText);
+
+		
+		const order = {
+			title: tourTitle.innerText,
+			adultNumber: inputAdult.value,
+			adultPrice: adultPrice.innerText,
+			childNumber: inputChild.value,
+			childPrice: childPrice.innerText,
+		};
+		basket.push(order);
+		console.log(basket);
 	}
 });
 
