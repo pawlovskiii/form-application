@@ -32,6 +32,7 @@ document.addEventListener('DOMContentLoaded', function () {
 		basket.push(order);
 		displaySummary();
 		totalNumberOfTickets(order, basket);
+		addTitleTourToSummary(order, basket)
 
 		console.log(basket);
 	}
@@ -357,10 +358,11 @@ function totalNumberOfTickets(order, basket) {
 	}
 }
 
-// function addTitleTourToSummary(basketOrder) {
-// 	const summaryName = document.querySelector('.summary__name');
-// 	summaryName.textContent = basketOrder.title;
-// }
+function addTitleTourToSummary(order, basket) {
+	let counter = basket.length - 1;
+	const summaryName = document.querySelectorAll('.summary__name');
+	summaryName[counter].textContent = order.title;
+}
 
 // function completeOrder(basketOrder) {
 // 	orderBtn = document.querySelector('.order__field-submit');
