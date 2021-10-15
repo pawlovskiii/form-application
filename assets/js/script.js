@@ -7,27 +7,33 @@ document.addEventListener('DOMContentLoaded', function () {
 	function handleSubmit(e) {
 		e.preventDefault();
 		const formSubmitted = e.target;
-		// console.log(formSubmitted);
 
 		const tourTitle =
-			formSubmitted.parentElement.querySelector('.excursions__title');
+			formSubmitted.parentElement.querySelector('.excursions__title').innerText;
 
 		const inputAdult = formSubmitted.querySelector(
 			'.excursions__field-input--adult'
-		);
-		const adultPrice = formSubmitted.querySelector('.excursions__price--adult');
-
+		).value;
 		const inputChild = formSubmitted.querySelector(
 			'.excursions__field-input--child'
-		);
-		const childPrice = formSubmitted.querySelector('.excursions__price--child');
+		).value;
+
+		emptyOrderValidation(inputAdult, inputChild);
+		numberValidation(inputAdult, inputChild);
+
+		const adultPrice = formSubmitted.querySelector(
+			'.excursions__price--adult'
+		).innerText;
+		const childPrice = formSubmitted.querySelector(
+			'.excursions__price--child'
+		).innerText;
 
 		const order = {
-			title: tourTitle.innerText,
-			adultNumber: inputAdult.value,
-			adultPrice: adultPrice.innerText,
-			childNumber: inputChild.value,
-			childPrice: childPrice.innerText,
+			title: tourTitle,
+			adultNumber: inputAdult,
+			adultPrice: adultPrice,
+			childNumber: inputChild,
+			childPrice: childPrice,
 		};
 		basket.push(order);
 		displaySummary();
@@ -57,11 +63,6 @@ fileEl.addEventListener('change', readFile);
 const ulTours = document.querySelector('.panel__excursions');
 const liTour = document.querySelector('.excursions__item--prototype');
 
-// const adultPriceList = document.querySelectorAll('.excursions__price--adult');
-// const childrenPriceList = document.querySelectorAll(
-// 	'.excursions__price--child'
-// );
-
 function readFile(e) {
 	const file = e.target.files[0];
 	if (file) {
@@ -82,30 +83,6 @@ function readFile(e) {
 			});
 
 			clearInputValues();
-
-			// let basketOrder = [];
-			// const addToOrderBtnList = document.querySelectorAll(
-			// 	'.excursions__field-input--submit'
-			// );
-			// const numberOfAdultTicketsInputList = document.querySelectorAll(
-			// 	'.excursions__field-input--adult'
-			// );
-			// const numberOfChildrenTicketsInputList = document.querySelectorAll(
-			// 	'.excursions__field-input--child'
-			// );
-
-			// firstTourOrder(
-			// 	addToOrderBtnList[0],
-			// 	numberOfAdultTicketsInputList[0],
-			// 	numberOfChildrenTicketsInputList[0]
-			// );
-			// secondTourOrder(
-			// 	addToOrderBtnList[1],
-			// 	numberOfAdultTicketsInputList[1],
-			// 	numberOfChildrenTicketsInputList[1]
-			// );
-			// completeOrder(basketOrder);
-			// removeOrder(basketOrder);
 		};
 		reader.readAsText(file, 'UTF-8');
 	} else {
@@ -142,174 +119,22 @@ function setTourDescription(item, index) {
 	tourDescList[index].textContent = item.split('","')[2];
 }
 
-// function firstTourOrder(
-// 	addToOrderBtnList,
-// 	numberOfAdultTicketsInputList,
-// 	numberOfChildrenTicketsInputList
-// ) {
-// 	// TESTING FUNC
-// 	const sectionPanel = document.querySelector('.panel');
-// 	sectionPanel.addEventListener('click', testFunc);
+function emptyOrderValidation(inputAdult, inputChild) {
+	if (!inputAdult && !inputChild) {
+		alert('Enter amount of tickets.');
+		throw Error('Invalid number of tickets.');
+	}
+}
 
-// 	function testFunc(e) {
-// 		console.log(e.target);
-// 		// console.log(e.target.value);
-// 	}
+function numberValidation(inputAdult, inputChild) {
+	const additionInput = inputAdult + inputChild;
+	const ticketsValidation = /^\d+$/g.test(additionInput);
 
-// 	// NOT CHANGE
-// 	addToOrderBtnList.addEventListener('click', addTicketsFirstTour);
-
-// 	function addTicketsFirstTour(e) {
-// 		e.preventDefault();
-
-// 		const adultTicketsQuantity = numberOfAdultTicketsInputList.value;
-// 		const childrenTicketsQuantity = numberOfChildrenTicketsInputList.value;
-
-// 		emptyOrderValidation(adultTicketsQuantity, childrenTicketsQuantity);
-// 		numberValidation(adultTicketsQuantity, childrenTicketsQuantity);
-
-// 		const basketOrder = {};
-// 		const title =
-// 			e.target.parentElement.parentElement.parentElement.firstElementChild
-// 				.firstElementChild.textContent;
-// 		const obj = { title: title };
-// 		setTitleOrder(basketOrder, obj);
-
-// 		const adultPriceList = document.querySelectorAll(
-// 			'.excursions__price--adult'
-// 		);
-// 		const childrenPriceList = document.querySelectorAll(
-// 			'.excursions__price--child'
-// 		);
-
-// 		// NEED TO CHANGE
-// 		let firstTourAdultQuantityTickets = 0;
-// 		getQuantityAndPriceTicketsAdultsOrder(
-// 			numberOfAdultTicketsInputList,
-// 			basketOrder,
-// 			firstTourAdultQuantityTickets,
-// 			adultPriceList[0]
-// 		);
-// 		let firstTourChildrenQuantityTickets = 0;
-// 		getQuantityAndPriceTicketsChildrenOrder(
-// 			numberOfChildrenTicketsInputList,
-// 			basketOrder,
-// 			firstTourChildrenQuantityTickets,
-// 			childrenPriceList[0]
-// 		);
-// 		console.log(basketOrder);
-
-// 		// safeZone
-// 		totalValueSummary(basketOrder);
-// 		totalNumberOfTickets(basketOrder);
-// 		addTitleTourToSummary(basketOrder);
-// 	}
-// }
-
-// function emptyOrderValidation(adultTicketsQuantity, childrenTicketsQuantity) {
-// 	if (!adultTicketsQuantity && !childrenTicketsQuantity) {
-// 		alert('Enter amount of tickets.');
-// 		throw Error('Invalid number of tickets.');
-// 	}
-// }
-
-// function numberValidation(adultTicketsQuantity, childrenTicketsQuantity) {
-// 	const additionInput = adultTicketsQuantity + childrenTicketsQuantity;
-// 	const ticketsValidation = /^\d+$/g.test(additionInput);
-
-// 	if (!ticketsValidation) {
-// 		alert('Enter integer values as orders values.');
-// 		throw Error('Invalid type of order values.');
-// 	}
-// }
-
-// function setTitleOrder(basketOrder, obj) {
-// 	if (Object.keys(basketOrder).length === 0) {
-// 		basketOrder.title = obj.title;
-// 	} else {
-// 		basketOrder.title = obj.title;
-// 	}
-// }
-
-// function getQuantityAndPriceTicketsAdultsOrder(
-// 	numberOfAdultTicketsInputList,
-// 	basketOrder,
-// 	quantityTicketsAdults,
-// 	adultPriceItem
-// ) {
-// 	if (numberOfAdultTicketsInputList.value) {
-// 		quantityTicketsAdults = numberOfAdultTicketsInputList.value;
-// 		basketOrder.adultNumber = quantityTicketsAdults;
-// 		basketOrder.adultPrice = adultPriceItem.textContent;
-// 	}
-// }
-
-// function getQuantityAndPriceTicketsChildrenOrder(
-// 	numberOfChildrenTicketsInputList,
-// 	basketOrder,
-// 	quantityTicketsChildren,
-// 	childrenPriceItem
-// ) {
-// 	if (numberOfChildrenTicketsInputList.value) {
-// 		quantityTicketsChildren = numberOfChildrenTicketsInputList.value;
-// 		basketOrder.childrenNumber = quantityTicketsChildren;
-// 		basketOrder.childrenPrice = childrenPriceItem.textContent;
-// 	}
-// }
-
-// function secondTourOrder(
-// 	addToOrderBtnList,
-// 	numberOfAdultTicketsInputList,
-// 	numberOfChildrenTicketsInputList
-// ) {
-// 	addToOrderBtnList.addEventListener('click', addTicketsSecondTour);
-
-// 	function addTicketsSecondTour(e) {
-// 		e.preventDefault();
-
-// 		const adultTicketsQuantity = numberOfAdultTicketsInputList.value;
-// 		const childrenTicketsQuantity = numberOfChildrenTicketsInputList.value;
-
-// 		emptyOrderValidation(adultTicketsQuantity, childrenTicketsQuantity);
-// 		numberValidation(adultTicketsQuantity, childrenTicketsQuantity);
-
-// 		const basketOrder = {};
-// 		const title =
-// 			e.target.parentElement.parentElement.parentElement.firstElementChild
-// 				.firstElementChild.textContent;
-// 		const obj = { title: title };
-// 		setTitleOrder(basketOrder, obj);
-
-// 		const adultPriceList = document.querySelectorAll(
-// 			'.excursions__price--adult'
-// 		);
-// 		const childrenPriceList = document.querySelectorAll(
-// 			'.excursions__price--child'
-// 		);
-
-// 		// NEED TO CHANGE
-// 		let secondTourAdultQuantityTickets = 0;
-// 		getQuantityAndPriceTicketsAdultsOrder(
-// 			numberOfAdultTicketsInputList,
-// 			basketOrder,
-// 			secondTourAdultQuantityTickets,
-// 			adultPriceList[1]
-// 		);
-// 		let secondTourChildrenQuantityTickets = 0;
-// 		getQuantityAndPriceTicketsChildrenOrder(
-// 			numberOfChildrenTicketsInputList,
-// 			basketOrder,
-// 			secondTourChildrenQuantityTickets,
-// 			childrenPriceList[1]
-// 		);
-// 		console.log(basketOrder);
-
-// 		// safeZone
-// 		totalValueSummary(basketOrder);
-// 		totalNumberOfTickets(basketOrder);
-// 		addTitleTourToSummary(basketOrder);
-// 	}
-// }
+	if (!ticketsValidation) {
+		alert('Enter integer values as orders values.');
+		throw Error('Invalid type of order values.');
+	}
+}
 
 function singleOrderSummary(basket) {
 	let counter = basket.length - 1;
