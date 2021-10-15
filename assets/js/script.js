@@ -32,8 +32,11 @@ document.addEventListener('DOMContentLoaded', function () {
 		basket.push(order);
 		displaySummary();
 		totalNumberOfTickets(order, basket);
-		addTitleTourToSummary(order, basket)
+		addTitleTourToSummary(order, basket);
+		singleOrderSummary(basket);
+		totalValueSummary();
 
+		// removeOrder(basket);
 		console.log(basket);
 	}
 });
@@ -308,37 +311,27 @@ function setTourDescription(item, index) {
 // 	}
 // }
 
-// function totalValueSummary(basketOrder) {
-// 	const totalCostValue = document.querySelector('.order__total-price-value');
-// 	const summaryCost = document.querySelector('.summary__total-price');
-// 	const adultTicketsCost = basketOrder.adultNumber * basketOrder.adultPrice;
-// 	const childrenTicketCost =
-// 		basketOrder.childrenNumber * basketOrder.childrenPrice;
-// 	possibleOrderOutput(
-// 		totalCostValue,
-// 		summaryCost,
-// 		adultTicketsCost,
-// 		childrenTicketCost
-// 	);
-// }
+function singleOrderSummary(basket) {
+	let counter = basket.length - 1;
+	const summaryCost = document.querySelectorAll('.summary__total-price');
+	const adultCost = basket[counter].adultNumber * basket[counter].adultPrice;
+	const childCost = basket[counter].childNumber * basket[counter].childPrice;
+	summaryCost[counter].textContent = `${adultCost + childCost} PLN`;
+}
 
-// function possibleOrderOutput(
-// 	totalCostValue,
-// 	summaryCost,
-// 	adultTicketsCost,
-// 	childrenTicketCost
-// ) {
-// 	if (adultTicketsCost && childrenTicketCost) {
-// 		totalCostValue.textContent = `${adultTicketsCost + childrenTicketCost}PLN`;
-// 		summaryCost.textContent = `${adultTicketsCost + childrenTicketCost}PLN`;
-// 	} else if (adultTicketsCost) {
-// 		totalCostValue.textContent = `${adultTicketsCost}PLN`;
-// 		summaryCost.textContent = `${adultTicketsCost}PLN`;
-// 	} else if (childrenTicketCost) {
-// 		totalCostValue.textContent = `${childrenTicketCost}PLN`;
-// 		summaryCost.textContent = `${childrenTicketCost}PLN`;
-// 	}
-// }
+function totalValueSummary() {
+	const totalCostValue = document.querySelector('.order__total-price-value');
+	const totalValueContainer = [];
+	const summaryCost = document.querySelectorAll('.summary__total-price');
+	summaryCost.forEach((item) => {
+		totalValueContainer.push(Number(item.textContent.match(/\d+/g)));
+		const totalValue = totalValueContainer
+			.flat()
+			.reduce((total, item) => (total += item));
+		console.log(totalValue);
+		totalCostValue.textContent = `${totalValue} PLN`;
+	});
+}
 
 function totalNumberOfTickets(order, basket) {
 	let counter = basket.length - 1;
@@ -403,14 +396,16 @@ function addTitleTourToSummary(order, basket) {
 // 	}
 // }
 
-// function removeOrder(basketOrder) {
-// 	if (basketOrder) {
+// function removeOrder(basket) {
+// 	if (basket) {
 // 		const removeOrder = document.querySelector('.summary__btn-remove');
 // 		removeOrder.addEventListener('click', formatValues);
 
 // 		function formatValues(e) {
 // 			e.preventDefault();
-// 			clearInputValues();
+// 			const removeBtn = e.target;
+// 			const liOrder = removeBtn.parentElement.parentElement;
+// 			liOrder.remove();
 // 		}
 // 	}
 // }
