@@ -8,43 +8,49 @@ document.addEventListener('DOMContentLoaded', function () {
 		e.preventDefault();
 		const formSubmitted = e.target;
 
-		const tourTitle =
-			formSubmitted.parentElement.querySelector('.excursions__title').innerText;
+		console.log(formSubmitted);
 
-		const inputAdult = formSubmitted.querySelector(
-			'.excursions__field-input--adult'
-		).value;
-		const inputChild = formSubmitted.querySelector(
-			'.excursions__field-input--child'
-		).value;
+		if ([...formSubmitted.classList].includes('excursions__form')) {
+			const tourTitle =
+				formSubmitted.parentElement.querySelector(
+					'.excursions__title'
+				).innerText;
 
-		emptyOrderValidation(inputAdult, inputChild);
-		numberValidation(inputAdult, inputChild);
+			const inputAdult = formSubmitted.querySelector(
+				'.excursions__field-input--adult'
+			).value;
+			const inputChild = formSubmitted.querySelector(
+				'.excursions__field-input--child'
+			).value;
 
-		const adultPrice = formSubmitted.querySelector(
-			'.excursions__price--adult'
-		).innerText;
-		const childPrice = formSubmitted.querySelector(
-			'.excursions__price--child'
-		).innerText;
+			emptyOrderValidation(inputAdult, inputChild);
+			numberValidation(inputAdult, inputChild);
 
-		const order = {
-			title: tourTitle,
-			adultNumber: inputAdult,
-			adultPrice: adultPrice,
-			childNumber: inputChild,
-			childPrice: childPrice,
-		};
-		basket.push(order);
-		displaySummary();
-		totalNumberOfTickets(order, basket);
-		addTitleTourToSummary(order, basket);
-		singleOrderSummary(basket);
-		totalValueSummary();
+			const adultPrice = formSubmitted.querySelector(
+				'.excursions__price--adult'
+			).innerText;
+			const childPrice = formSubmitted.querySelector(
+				'.excursions__price--child'
+			).innerText;
 
-		// completeOrder(basket);
+			const order = {
+				title: tourTitle,
+				adultNumber: inputAdult,
+				adultPrice: adultPrice,
+				childNumber: inputChild,
+				childPrice: childPrice,
+			};
+			basket.push(order);
+			displaySummary();
+			totalNumberOfTickets(order, basket);
+			addTitleTourToSummary(order, basket);
+			singleOrderSummary(basket);
+			totalValueSummary();
 
-		removeOrder(basket);
+			removeOrder(basket);
+		} else {
+			completeOrder(basket);
+		}
 	}
 });
 
@@ -82,8 +88,6 @@ function readFile(e) {
 
 				setTourDescription(item, index);
 			});
-
-			clearInputValues();
 		};
 		reader.readAsText(file, 'UTF-8');
 	} else {
@@ -188,47 +192,41 @@ function addTitleTourToSummary(order, basket) {
 	summaryName[counter].textContent = order.title;
 }
 
-// function completeOrder(basket) {
-// 	if (!basket) {
-// 		throw Error('Basket is empty');
-// 	}
-// 	orderBtn = document.querySelector('.order__field-submit');
-// 	orderBtn.addEventListener('click', submitYourOrder);
+function completeOrder(basket) {
+	orderBtn = document.querySelector('.order__field-submit');
+	orderBtn.addEventListener('click', submitYourOrder);
 
-// 	function submitYourOrder(e) {
-// 		e.preventDefault();
+	function submitYourOrder(e) {
+		e.preventDefault();
 
-// 		fullNameValidation();
-// 		emailValidation();
+		fullNameValidation();
+		emailValidation();
 
-// 		const totalOrder = document.querySelector(
-// 			'.order__total-price-value'
-// 		).textContent;
+		if (basket.length !== 0) {
+			removeEverything(basket);
+			alert('Order was placed!');
+		} else {
+			alert('Basked is empty!');
+			throw Error('Basket is empty!');
+		}
+	}
+}
 
-// 		if (totalOrder === '0PLN') {
-// 			alert('Your basket is empty! :(');
-// 		} else {
-// 			alert('Order was placed!');
-// 			clearInputValues();
-// 		}
-// 	}
-// }
+function fullNameValidation() {
+	const fullName = document.querySelector('input[name*="name"]').value;
+	if (!fullName) {
+		alert('Please enter your first and last name.');
+		throw Error('Please enter your first and last name.');
+	}
+}
 
-// function fullNameValidation() {
-// 	const fullName = document.querySelector('input[name*="name"]').value;
-// 	if (!fullName) {
-// 		alert('Please enter your first and last name.');
-// 		throw Error('Please enter your first and last name.');
-// 	}
-// }
-
-// function emailValidation() {
-// 	const email = document.querySelector('input[name*="email"]').value;
-// 	if (!email.match(/@/g)) {
-// 		alert('Email needs to contain "@" sign.');
-// 		throw Error('Email needs to contain "@" sign.');
-// 	}
-// }
+function emailValidation() {
+	const email = document.querySelector('input[name*="email"]').value;
+	if (!email.match(/@/g)) {
+		alert('Email needs to contain "@" sign.');
+		throw Error('Email needs to contain "@" sign.');
+	}
+}
 
 function removeOrder(basket) {
 	let counter = basket.length - 1;
@@ -246,31 +244,12 @@ function removeOrder(basket) {
 	}
 }
 
-function clearInputValues() {
-	const totalCostValue = document.querySelector('.order__total-price-value');
-	const summaryCost = document.querySelector('.summary__total-price');
-	const summaryText = document.querySelector('.summary__prices');
-	const summaryName = document.querySelector('.summary__name');
-	totalCostValue.textContent = `0PLN`;
-	summaryCost.textContent = `0PLN`;
-	summaryText.textContent = '';
-	summaryName.textContent = '';
-
-	const fullName = document.querySelector('input[name*="name"]');
-	const email = document.querySelector('input[name*="email"]');
-	fullName.value = '';
-	email.value = '';
-
-	const inputQuantityAdultList = document.querySelectorAll(
-		'.excursions__field-input--adult'
-	);
-	const inputQuantityChildrenList = document.querySelectorAll(
-		'.excursions__field-input--child'
-	);
-	inputQuantityAdultList.forEach((item) => {
-		item.value = '';
+function removeEverything(basket) {
+	const orderList = document.querySelectorAll('.summary__item');
+	const totalOrder = document.querySelector('.order__total-price-value');
+	orderList.forEach((item) => {
+		item.remove();
+		basket.pop();
 	});
-	inputQuantityChildrenList.forEach((item) => {
-		item.value = '';
-	});
+	totalOrder.textContent = '0 PLN';
 }
