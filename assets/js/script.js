@@ -42,8 +42,9 @@ document.addEventListener('DOMContentLoaded', function () {
 		singleOrderSummary(basket);
 		totalValueSummary();
 
-		// removeOrder(basket);
-		console.log(basket);
+		// completeOrder(basket);
+
+		removeOrder(basket);
 	}
 });
 
@@ -148,14 +149,19 @@ function totalValueSummary() {
 	const totalCostValue = document.querySelector('.order__total-price-value');
 	const totalValueContainer = [];
 	const summaryCost = document.querySelectorAll('.summary__total-price');
-	summaryCost.forEach((item) => {
-		totalValueContainer.push(Number(item.textContent.match(/\d+/g)));
-		const totalValue = totalValueContainer
-			.flat()
-			.reduce((total, item) => (total += item));
-		console.log(totalValue);
-		totalCostValue.textContent = `${totalValue} PLN`;
-	});
+	if (summaryCost.length !== 0) {
+		summaryCost.forEach((item) => {
+			totalValueContainer.push(Number(item.textContent.match(/\d+/g)));
+			const totalValue = totalValueContainer
+				.flat()
+				.reduce((total, item) => (total += item), 0);
+			console.log(totalValue);
+
+			totalCostValue.textContent = `${totalValue} PLN`;
+		});
+	} else {
+		totalCostValue.textContent = '0 PLN';
+	}
 }
 
 function totalNumberOfTickets(order, basket) {
@@ -182,7 +188,10 @@ function addTitleTourToSummary(order, basket) {
 	summaryName[counter].textContent = order.title;
 }
 
-// function completeOrder(basketOrder) {
+// function completeOrder(basket) {
+// 	if (!basket) {
+// 		throw Error('Basket is empty');
+// 	}
 // 	orderBtn = document.querySelector('.order__field-submit');
 // 	orderBtn.addEventListener('click', submitYourOrder);
 
@@ -192,11 +201,11 @@ function addTitleTourToSummary(order, basket) {
 // 		fullNameValidation();
 // 		emailValidation();
 
-// 		const summaryCost = document.querySelector(
-// 			'.summary__total-price'
+// 		const totalOrder = document.querySelector(
+// 			'.order__total-price-value'
 // 		).textContent;
 
-// 		if (summaryCost === '0PLN') {
+// 		if (totalOrder === '0PLN') {
 // 			alert('Your basket is empty! :(');
 // 		} else {
 // 			alert('Order was placed!');
@@ -221,19 +230,21 @@ function addTitleTourToSummary(order, basket) {
 // 	}
 // }
 
-// function removeOrder(basket) {
-// 	if (basket) {
-// 		const removeOrder = document.querySelector('.summary__btn-remove');
-// 		removeOrder.addEventListener('click', formatValues);
+function removeOrder(basket) {
+	let counter = basket.length - 1;
+	const removeOrderList = document.querySelectorAll('.summary__btn-remove');
+	removeOrderList[counter].addEventListener('click', formatValues);
 
-// 		function formatValues(e) {
-// 			e.preventDefault();
-// 			const removeBtn = e.target;
-// 			const liOrder = removeBtn.parentElement.parentElement;
-// 			liOrder.remove();
-// 		}
-// 	}
-// }
+	function formatValues(e) {
+		e.preventDefault();
+
+		basket.pop();
+		const removeBtn = e.target;
+		const currentLi = removeBtn.parentElement.parentElement;
+		currentLi.remove();
+		totalValueSummary();
+	}
+}
 
 function clearInputValues() {
 	const totalCostValue = document.querySelector('.order__total-price-value');
