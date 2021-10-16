@@ -81,12 +81,12 @@ function readFile(e) {
 			displayTours(splittedTxt);
 
 			splittedTxt.forEach((item, index) => {
-				setTourName(item, index);
+				const splitItem = item.split('","');
 
-				setAdultPrice(item, index);
-				setChildPrice(item, index);
-
-				setTourDescription(item, index);
+				setTourName(splitItem, index);
+				setAdultPrice(splitItem, index);
+				setChildPrice(splitItem, index);
+				setTourDescription(splitItem, index);
 			});
 		};
 		reader.readAsText(file, 'UTF-8');
@@ -104,24 +104,24 @@ function displayTours(splittedTxt) {
 	liTour.remove();
 }
 
-function setTourName(item, index) {
+function setTourName(splitItem, index) {
 	const toursName = document.querySelectorAll('.excursions__title');
-	toursName[index].textContent = item.split('","')[1];
+	toursName[index].textContent = splitItem[1];
 }
 
-function setChildPrice(item, index) {
+function setChildPrice(splitItem, index) {
 	const childPriceList = document.querySelectorAll('.excursions__price--child');
-	childPriceList[index].textContent = item.split('","')[4].replace('"', '');
+	childPriceList[index].textContent = splitItem[4].replace('"', '');
 }
 
-function setAdultPrice(item, index) {
+function setAdultPrice(splitItem, index) {
 	const adultPriceList = document.querySelectorAll('.excursions__price--adult');
-	adultPriceList[index].textContent = item.split('","')[3];
+	adultPriceList[index].textContent = splitItem[3];
 }
 
-function setTourDescription(item, index) {
+function setTourDescription(splitItem, index) {
 	const tourDescList = document.querySelectorAll('.excursions__description');
-	tourDescList[index].textContent = item.split('","')[2];
+	tourDescList[index].textContent = splitItem[2];
 }
 
 function emptyOrderValidation(inputAdult, inputChild) {
