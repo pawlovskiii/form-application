@@ -8,8 +8,6 @@ document.addEventListener('DOMContentLoaded', function () {
 		e.preventDefault();
 		const formSubmitted = e.target;
 
-		console.log(formSubmitted);
-
 		if ([...formSubmitted.classList].includes('excursions__form')) {
 			const tourTitle =
 				formSubmitted.parentElement.querySelector(
@@ -159,8 +157,6 @@ function totalValueSummary() {
 			const totalValue = totalValueContainer
 				.flat()
 				.reduce((total, item) => (total += item), 0);
-			console.log(totalValue);
-
 			totalCostValue.textContent = `${totalValue} PLN`;
 		});
 	} else {
