@@ -184,8 +184,8 @@ function addTitleTourToSummary(order, basket) {
 }
 
 function completeOrder(basket) {
-	orderBtn = document.querySelector('.order__field-submit');
-	orderBtn.addEventListener('submit', submitYourOrder);
+	formPanelOrder = document.querySelector('.panel__order');
+	formPanelOrder.addEventListener('submit', submitYourOrder);
 
 	function submitYourOrder(e) {
 		e.preventDefault();
