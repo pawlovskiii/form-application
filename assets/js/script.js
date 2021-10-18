@@ -8,48 +8,43 @@ document.addEventListener('DOMContentLoaded', function () {
 		e.preventDefault();
 		const formSubmitted = e.target;
 
-		if ([...formSubmitted.classList].includes('excursions__form')) {
-			const tourTitle =
-				formSubmitted.parentElement.querySelector(
-					'.excursions__title'
-				).innerText;
+		const tourTitle =
+			formSubmitted.parentElement.querySelector('.excursions__title').innerText;
 
-			const inputAdult = formSubmitted.querySelector(
-				'.excursions__field-input--adult'
-			).value;
-			const inputChild = formSubmitted.querySelector(
-				'.excursions__field-input--child'
-			).value;
+		const inputAdult = formSubmitted.querySelector(
+			'.excursions__field-input--adult'
+		).value;
+		const inputChild = formSubmitted.querySelector(
+			'.excursions__field-input--child'
+		).value;
 
-			emptyOrderValidation(inputAdult, inputChild);
-			numberValidation(inputAdult, inputChild);
+		emptyOrderValidation(inputAdult, inputChild);
+		numberValidation(inputAdult, inputChild);
 
-			const adultPrice = formSubmitted.querySelector(
-				'.excursions__price--adult'
-			).innerText;
-			const childPrice = formSubmitted.querySelector(
-				'.excursions__price--child'
-			).innerText;
+		const adultPrice = formSubmitted.querySelector(
+			'.excursions__price--adult'
+		).innerText;
+		const childPrice = formSubmitted.querySelector(
+			'.excursions__price--child'
+		).innerText;
 
-			const order = {
-				title: tourTitle,
-				adultNumber: inputAdult,
-				adultPrice: adultPrice,
-				childNumber: inputChild,
-				childPrice: childPrice,
-			};
-			basket.push(order);
-			displaySummary();
-			totalNumberOfTickets(order, basket);
-			addTitleTourToSummary(order, basket);
-			singleOrderSummary(basket);
-			totalValueSummary();
+		const order = {
+			title: tourTitle,
+			adultNumber: inputAdult,
+			adultPrice: adultPrice,
+			childNumber: inputChild,
+			childPrice: childPrice,
+		};
+		basket.push(order);
+		displaySummary();
+		totalNumberOfTickets(order, basket);
+		addTitleTourToSummary(order, basket);
+		singleOrderSummary(basket);
+		totalValueSummary();
 
-			removeOrder(basket);
-		} else {
-			completeOrder(basket);
-		}
+		removeOrder(basket);
 	}
+	completeOrder(basket);
 });
 
 const ulSummary = document.querySelector('.panel__summary');
