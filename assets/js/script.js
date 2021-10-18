@@ -185,7 +185,7 @@ function addTitleTourToSummary(order, basket) {
 
 function completeOrder(basket) {
 	orderBtn = document.querySelector('.order__field-submit');
-	orderBtn.addEventListener('click', submitYourOrder);
+	orderBtn.addEventListener('submit', submitYourOrder);
 
 	function submitYourOrder(e) {
 		e.preventDefault();
