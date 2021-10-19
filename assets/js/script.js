@@ -189,6 +189,7 @@ function completeOrder(basket) {
 
 	function submitYourOrder(e) {
 		e.preventDefault();
+		e.stopPropagation();
 
 		fullNameValidation();
 		emailValidation();
