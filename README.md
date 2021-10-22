@@ -1,16 +1,19 @@
 # Form-Application
 
-See the live version of [form-application](https://pawlovskiii.github.io/form-application/).
+See the live version of [Form-Application](https://pawlovskiii.github.io/form-application/).
 
-The project was mainly focused on learning about JavaScript forms. 
+In this project I focused on learning the concept and main mechanics within form handling. Which consists of receiving data, checking their correctness and adequate security. In order to manupilate them in certain way using JavaScript.
 
 **Main features**:
 
 - Forms
 - Events
-- ES2015+
+- ES6+
 
 ## 💡 Technologies
+
+![HTML5](https://img.shields.io/badge/html5-%23E34F26.svg?style=for-the-badge&logo=html5&logoColor=white)
+![CSS3](https://img.shields.io/badge/css3-%231572B6.svg?style=for-the-badge&logo=css3&logoColor=white)
 ![JavaScript](https://img.shields.io/badge/javascript-%23323330.svg?style=for-the-badge&logo=javascript&logoColor=%23F7DF1E)
 
 ## 💿 Installation
@@ -19,28 +22,21 @@ To clone and run this application, you'll need [Git](https://git-scm.com) and [N
 
 ```bash
 # Clone this repository
-$ git clone https://github.com/pawlovskiii/applab-website
+$ git clone https://pawlovskiii.github.io/form-application/
 
 # Go into the repository
-$ cd applab-website
+$ cd form-application
 
 # Install dependencies
-$ npm install 
+$ npm install
 
 # Run the app
 $ npm start
 ```
 
-## 💭 Conclusions for future projects
-
-
-
-
 ## 🙋‍♂️ Feel free to contact me
 
 Find me on [LinkedIn](https://www.linkedin.com/in/jakub-paw%C5%82owski-921b74216/) :)
-
-
 
 ## 👏 Thanks / Special thanks / Credits
 
