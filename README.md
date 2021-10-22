@@ -9,6 +9,7 @@ In this project I focused on learning the concept and main mechanics within form
 - Forms
 - Events
 - ES6+
+- Webpack & Babel
 
 ## 💡 Technologies
 
