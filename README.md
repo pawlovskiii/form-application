@@ -2,7 +2,7 @@
 
 See the live version of [Form-Application](https://pawlovskiii.github.io/form-application/).
 
-In this project I focused on learning the concept and main mechanics within form handling. Which consists of receiving data, checking their correctness and adequate security. In order to manupilate them in certain way using JavaScript.
+In this project I focused on learning the concept and main mechanics within form handling. Which consists of receiving data, checking their correctness and adequate security. In order to manipulate them in certain way using JavaScript.
 
 Application doesn't operate with JavaScript in Github Pages, because it uses Webpack. Due to that user needs to install project manually with the instructions below. After that user can check the functionality of the project by selecting example.csv file and uploading it to the website.
 
